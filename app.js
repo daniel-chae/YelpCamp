@@ -13,8 +13,7 @@ var commentRoutes = require("./routes/comments"),
     campgroundRoutes = require("./routes/campground"),
     indexRoutes = require("./routes/index");
     
-var url = process.evn.DATABASEURL || "mongodb://localhost/yelp_camp"
-mongoose.connect(url);
+mongoose.connect(process.env.DATABASEURL);
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
