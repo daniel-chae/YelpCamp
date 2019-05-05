@@ -1,9 +1,12 @@
 var express = require("express");
+
 var router = express.Router();
+
 var Campground = require("../models/campground");
-var middleware = require("../middleware")
+var middleware = require("../middleware");
 
 //INDEX - SHOW ALL CAMPGROUNDS
+// ./campground/
 router.get("/", function(req, res){
     // Get all campgrounds from DB
     Campground.find({}, function(err, campgrounds){
@@ -27,6 +30,7 @@ router.post("/", middleware.isLoggedIn, function(req,res){
             campground.user.id = req.user._id;
             campground.user.username = req.user.username;
             campground.save();
+            req.flash("success", "A new blog post is successfully created!")
             //Redirects back to the campground
             res.redirect("/campgrounds");
         }
@@ -70,6 +74,7 @@ router.put("/:id", middleware.checkUser, function(req, res){
            console.log(err);
            res.redirect("/campgrounds");
        } else {
+           req.flash("success", "The blog post is successfully editted");
            res.redirect("/campgrounds/" + req.params.id);
        }
    });

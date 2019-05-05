@@ -1,9 +1,9 @@
-var express        = require("express"), 
-    app            = express(),
+var express        = require("express"), //okay
+    app            = express(), //okay
     bodyParser     = require("body-parser"),
-    mongoose       = require("mongoose"),
+    mongoose       = require("mongoose"), //okay
     seedDB         = require("./seed"),
-    flash          = require("connect-flash"),
+    flash          = require("connect-flash"), //okay
     passport       = require("passport"),
     LocalStrategy  = require("passport-local"),
     User                  = require("./models/user"),
@@ -14,7 +14,7 @@ var commentRoutes = require("./routes/comments"),
     indexRoutes = require("./routes/index");
     
 mongoose.connect(process.env.DATABASEURL);
-
+// mongoose.connect("mongodb://daniel:1151chai@ds255332.mlab.com:55332/danielchae");
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -33,6 +33,8 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+//flash
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
     res.locals.error = req.flash("error");

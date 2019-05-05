@@ -56,4 +56,4 @@ middlewareObj.checkComment = function(req, res, next){
     }
 };
 
-module.exports = middlewareObj
+module.exports = middlewareObj;
